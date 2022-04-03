@@ -9,5 +9,7 @@ namespace GestaoIso.Data
             : base(options)
         {
         }
+
+        public DbSet<Dominio> Dominio { get; set; }
     }
 }
