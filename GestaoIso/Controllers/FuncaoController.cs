@@ -44,7 +44,7 @@ namespace GestaoIso.Controllers
         // GET: Funcao/Create
         public IActionResult Create()
         {
-            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "DominioId");
+            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace GestaoIso.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "DominioId", funcao.DominioIdEducacao);
+            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
             return View(funcao);
         }
 
@@ -78,7 +78,7 @@ namespace GestaoIso.Controllers
             {
                 return NotFound();
             }
-            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "DominioId", funcao.DominioIdEducacao);
+            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
             return View(funcao);
         }
 
@@ -114,7 +114,7 @@ namespace GestaoIso.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "DominioId", funcao.DominioIdEducacao);
+            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
             return View(funcao);
         }
 
