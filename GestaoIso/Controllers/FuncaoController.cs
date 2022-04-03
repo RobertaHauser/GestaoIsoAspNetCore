@@ -1,11 +1,13 @@
 ﻿#nullable disable
 using GestaoIso.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoIso.Controllers
 {
+    [Authorize]
     public class FuncaoController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -58,8 +60,28 @@ namespace GestaoIso.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(funcao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                funcao.CriacaoResp = User.Identity.Name;
+                funcao.CriacaoData = DateTime.Now;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (System.Exception ex)
+                {
+                    if (ex.InnerException != null &&
+                       ex.InnerException.InnerException != null &&
+                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Função já cadastrada!");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
+                    return View(funcao);
+                }
             }
             ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
             return View(funcao);
@@ -96,6 +118,8 @@ namespace GestaoIso.Controllers
 
             if (ModelState.IsValid)
             {
+                funcao.RevisaoData = DateTime.Now;
+                funcao.RevisaoResp = User.Identity.Name;
                 try
                 {
                     _context.Update(funcao);

@@ -25,7 +25,7 @@ namespace GestaoIso.Data
         public string Treinamento { get; set; }
 
         [Display(Name = "Criado por")]
-        public string CriacaoResp { get; set; }
+        public string? CriacaoResp { get; set; }
 
         [Display(Name = "Criado em")]
         public DateTime CriacaoData { get; set; }
