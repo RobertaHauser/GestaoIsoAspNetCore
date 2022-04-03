@@ -10,7 +10,6 @@ namespace GestaoIso.Data
         public int? Ordem { get; set; }
         public string Tabela { get; set; }
 
-
-        //public ICollection<Funcao>? FuncaoEducacao { get; set; }
+        public ICollection<Funcao>? FuncaoEducacao { get; set; }
     }
 }

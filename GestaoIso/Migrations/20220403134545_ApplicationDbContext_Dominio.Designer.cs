@@ -4,6 +4,7 @@ using GestaoIso.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoIso.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220403134545_ApplicationDbContext_Dominio")]
+    partial class ApplicationDbContext_Dominio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,8 +109,12 @@ namespace GestaoIso.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DominioIdEducacao")
+                    b.Property<int?>("DominioId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Educacao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Experiencia")
                         .IsRequired()
@@ -135,7 +141,7 @@ namespace GestaoIso.Migrations
                     b.HasIndex("Cargo")
                         .IsUnique();
 
-                    b.HasIndex("DominioIdEducacao");
+                    b.HasIndex("DominioId");
 
                     b.ToTable("Funcao");
                 });
@@ -344,13 +350,9 @@ namespace GestaoIso.Migrations
 
             modelBuilder.Entity("GestaoIso.Data.Funcao", b =>
                 {
-                    b.HasOne("GestaoIso.Data.Dominio", "DominioEducacao")
+                    b.HasOne("GestaoIso.Data.Dominio", null)
                         .WithMany("FuncaoEducacao")
-                        .HasForeignKey("DominioIdEducacao")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DominioEducacao");
+                        .HasForeignKey("DominioId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
