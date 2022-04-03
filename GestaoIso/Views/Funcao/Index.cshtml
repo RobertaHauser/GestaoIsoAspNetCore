@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Experiencia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DominioEducacao)
+                @Html.DisplayNameFor(model => model.DominioEducacao.Descricao)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Treinamento)
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Experiencia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DominioEducacao.DominioId)
+                @Html.DisplayFor(modelItem => item.DominioEducacao.Descricao)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Treinamento)

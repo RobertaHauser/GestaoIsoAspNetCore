@@ -28,5 +28,7 @@ namespace GestaoIso.Data
         }
 
         public DbSet<GestaoIso.Data.Funcao> Funcao { get; set; }
+
+        public DbSet<GestaoIso.Data.Pessoa> Pessoa { get; set; }
     }
 }
