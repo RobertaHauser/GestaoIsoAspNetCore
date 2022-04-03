@@ -142,6 +142,62 @@ namespace GestaoIso.Controllers
             return View(funcao);
         }
 
+        // GET: Funcao/Approve/5
+        public async Task<IActionResult> Approve(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var funcao = await _context.Funcao.FindAsync(id);
+            if (funcao == null)
+            {
+                return NotFound();
+            }
+            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
+            return View(funcao);
+        }
+
+        // POST: Funcao/Approve/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Approve(int id, [Bind("FuncaoId,Cargo,Experiencia,DominioIdEducacao,Treinamento,CriacaoResp,CriacaoData,RevisaoResp,RevisaoData,AprovacaoStatus,AprovacaoResp,AprovacaoData,Status,ProdutoComentario")] Funcao funcao)
+        {
+            if (id != funcao.FuncaoId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                funcao.AprovacaoData = DateTime.Now;
+                funcao.AprovacaoResp = User.Identity.Name;
+                try
+                {
+                    _context.Update(funcao);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!FuncaoExists(funcao.FuncaoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
+            return View(funcao);
+        }
+
+
         // GET: Funcao/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
