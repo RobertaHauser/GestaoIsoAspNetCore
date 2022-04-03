@@ -62,6 +62,7 @@ namespace GestaoIso.Controllers
                 _context.Add(funcao);
                 funcao.CriacaoResp = User.Identity.Name;
                 funcao.CriacaoData = DateTime.Now;
+                funcao.Status = "Aguardando Aprovação";
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -120,6 +121,14 @@ namespace GestaoIso.Controllers
             {
                 funcao.RevisaoData = DateTime.Now;
                 funcao.RevisaoResp = User.Identity.Name;
+                if (funcao.AprovacaoStatus == true)
+                {
+                    funcao.Status = "Aprovado";
+                }
+                else
+                {
+                    funcao.Status = "Aguardando Aprovação";
+                }
                 try
                 {
                     _context.Update(funcao);
@@ -173,8 +182,12 @@ namespace GestaoIso.Controllers
 
             if (ModelState.IsValid)
             {
-                funcao.AprovacaoData = DateTime.Now;
-                funcao.AprovacaoResp = User.Identity.Name;
+                if (funcao.AprovacaoStatus == true)
+                {
+                    funcao.AprovacaoData = DateTime.Now;
+                    funcao.AprovacaoResp = User.Identity.Name;
+                    funcao.Status = "Aprovado";
+                }
                 try
                 {
                     _context.Update(funcao);
