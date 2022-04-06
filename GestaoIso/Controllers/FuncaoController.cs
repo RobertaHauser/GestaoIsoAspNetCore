@@ -71,8 +71,7 @@ namespace GestaoIso.Controllers
                 catch (System.Exception ex)
                 {
                     if (ex.InnerException != null &&
-                       ex.InnerException.InnerException != null &&
-                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                       ex.InnerException.Message.Contains("duplicada"))
                     {
                         ModelState.AddModelError(string.Empty, "Função já cadastrada!");
                     }
@@ -145,6 +144,21 @@ namespace GestaoIso.Controllers
                         throw;
                     }
                 }
+                catch (System.Exception ex)
+                {
+                    if (ex.InnerException != null &&
+                       ex.InnerException.Message.Contains("duplicada"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Função já cadastrada!");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);
+                    return View(funcao);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DominioIdEducacao"] = new SelectList(_context.Dominio, "DominioId", "Descricao", funcao.DominioIdEducacao);

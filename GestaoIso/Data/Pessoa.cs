@@ -87,6 +87,6 @@ namespace GestaoIso.Data
         public DateTime? RevisaoData { get; set; }
 
 
-        //public Funcionario? Funcionario { get; set; }
+        public Funcionario? Funcionario { get; set; }
     }
 }

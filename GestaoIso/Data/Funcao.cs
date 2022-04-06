@@ -52,5 +52,9 @@ namespace GestaoIso.Data
         [DataType(DataType.MultilineText)]
         public string? ProdutoComentario { get; set; }
 
+        
+        
+        public virtual ICollection<Funcionario>? Funcionario { get; set; }
+
     }
 }

@@ -25,10 +25,16 @@ namespace GestaoIso.Data
             builder.Entity<Dominio>().HasData(new Dominio { DominioId = 4, Descricao = "Médio", Tabela = "Educacao" });
             builder.Entity<Dominio>().HasData(new Dominio { DominioId = 5, Descricao = "Superior", Tabela = "Educacao" });
 
+            builder.Entity<Pessoa>().HasOne(c => c.Funcionario).WithOne(c => c.Pessoa).HasForeignKey<Funcionario>(c => c.PessoaIdFuncionario);
+
+            builder.Entity<Funcionario>().HasOne(c => c.Funcao).WithMany(c => c.Funcionario).HasForeignKey(c => c.FuncaoId);
+
         }
 
         public DbSet<GestaoIso.Data.Funcao> Funcao { get; set; }
 
         public DbSet<GestaoIso.Data.Pessoa> Pessoa { get; set; }
+
+        public DbSet<GestaoIso.Data.Funcionario> Funcionario { get; set; }
     }
 }
