@@ -13,34 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sobrenome)
+                @Html.DisplayNameFor(model => model.NomeCompleto)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CpfCnpj)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rua)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Numero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Complemento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cep)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -73,34 +49,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sobrenome)
+                @Html.DisplayFor(modelItem => item.NomeCompleto)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CpfCnpj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Complemento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cep)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)

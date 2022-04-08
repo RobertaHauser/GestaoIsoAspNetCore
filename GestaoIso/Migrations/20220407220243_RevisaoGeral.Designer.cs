@@ -4,6 +4,7 @@ using GestaoIso.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoIso.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220407220243_RevisaoGeral")]
+    partial class RevisaoGeral
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,9 +171,11 @@ namespace GestaoIso.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PessoaId"), 1L, 1);
 
                     b.Property<string>("Cep")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cidade")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Comentario")
@@ -182,8 +186,7 @@ namespace GestaoIso.Migrations
 
                     b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CriacaoData")
                         .HasColumnType("datetime2");
@@ -196,6 +199,7 @@ namespace GestaoIso.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estado")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
@@ -204,6 +208,7 @@ namespace GestaoIso.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Numero")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RevisaoData")
@@ -216,6 +221,7 @@ namespace GestaoIso.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rua")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sobrenome")
@@ -227,12 +233,10 @@ namespace GestaoIso.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelefoneResidencial")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PessoaId");
-
-                    b.HasIndex("CpfCnpj")
-                        .IsUnique();
 
                     b.ToTable("Pessoa");
                 });

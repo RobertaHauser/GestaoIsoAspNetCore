@@ -4,6 +4,7 @@ using GestaoIso.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoIso.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220407230526_Pessoa_Edit")]
+    partial class Pessoa_Edit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,9 +232,6 @@ namespace GestaoIso.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PessoaId");
-
-                    b.HasIndex("CpfCnpj")
-                        .IsUnique();
 
                     b.ToTable("Pessoa");
                 });

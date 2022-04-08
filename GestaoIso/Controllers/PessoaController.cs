@@ -1,15 +1,12 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GestaoIso.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoIso.Controllers
 {
+    [Authorize]
     public class PessoaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -59,8 +56,26 @@ namespace GestaoIso.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(pessoa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                pessoa.CriacaoResp = User.Identity.Name;
+                pessoa.CriacaoData = DateTime.Now;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (System.Exception ex)
+                {
+                    if (ex.InnerException != null &&
+                       ex.InnerException.Message.Contains("duplicada"))
+                    {
+                        ModelState.AddModelError(string.Empty, "CPF já cadastrado!");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    return View(pessoa);
+                }
             }
             return View(pessoa);
         }
@@ -110,6 +125,19 @@ namespace GestaoIso.Controllers
                     {
                         throw;
                     }
+                }
+                catch (System.Exception ex)
+                {
+                    if (ex.InnerException != null &&
+                       ex.InnerException.Message.Contains("duplicada"))
+                    {
+                        ModelState.AddModelError(string.Empty, "CPF já cadastrado!");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    return View(pessoa);
                 }
                 return RedirectToAction(nameof(Index));
             }

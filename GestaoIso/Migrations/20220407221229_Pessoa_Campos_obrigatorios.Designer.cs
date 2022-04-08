@@ -4,6 +4,7 @@ using GestaoIso.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoIso.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220407221229_Pessoa_Campos_obrigatorios")]
+    partial class Pessoa_Campos_obrigatorios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,8 +184,7 @@ namespace GestaoIso.Migrations
 
                     b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CriacaoData")
                         .HasColumnType("datetime2");
@@ -230,9 +231,6 @@ namespace GestaoIso.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PessoaId");
-
-                    b.HasIndex("CpfCnpj")
-                        .IsUnique();
 
                     b.ToTable("Pessoa");
                 });
