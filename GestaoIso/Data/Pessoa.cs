@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace GestaoIso.Data
 {
     [Index(nameof(CpfCnpj), IsUnique = true)]//sem duplicidade
+    [Index(nameof(Email), IsUnique = true)]//sem duplicidade
+
     public class Pessoa
     {
         [Key]

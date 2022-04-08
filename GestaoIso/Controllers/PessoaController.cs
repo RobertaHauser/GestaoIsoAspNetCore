@@ -68,7 +68,7 @@ namespace GestaoIso.Controllers
                     if (ex.InnerException != null &&
                        ex.InnerException.Message.Contains("duplicada"))
                     {
-                        ModelState.AddModelError(string.Empty, "CPF já cadastrado!");
+                        ModelState.AddModelError(string.Empty, "Informação (CPF e/ou E-mail) já cadastrado!");
                     }
                     else
                     {
@@ -110,6 +110,8 @@ namespace GestaoIso.Controllers
 
             if (ModelState.IsValid)
             {
+                pessoa.RevisaoData = DateTime.Now;
+                pessoa.RevisaoResp = User.Identity.Name;
                 try
                 {
                     _context.Update(pessoa);
@@ -131,7 +133,7 @@ namespace GestaoIso.Controllers
                     if (ex.InnerException != null &&
                        ex.InnerException.Message.Contains("duplicada"))
                     {
-                        ModelState.AddModelError(string.Empty, "CPF já cadastrado!");
+                        ModelState.AddModelError(string.Empty, "Informação (CPF e/ou E-mail) já cadastrado!");
                     }
                     else
                     {

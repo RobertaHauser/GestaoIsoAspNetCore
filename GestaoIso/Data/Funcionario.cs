@@ -15,9 +15,14 @@ namespace GestaoIso.Data
 
 
 
-
+        [Display(Name = "Data Admissão")]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime DataAdmissao { get; set; }
-        public DateTime DataDemissao { get; set; }
+
+        [Display(Name = "Data Demissão")]
+        [DataType(DataType.Date)]
+        public DateTime? DataDemissao { get; set; }
 
 
         [Display(Name = "Função")]
