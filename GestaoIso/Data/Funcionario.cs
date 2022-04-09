@@ -29,5 +29,21 @@ namespace GestaoIso.Data
         [Required(ErrorMessage = "O Campo {0} é Obrigatório!")]
         public int FuncaoId { get; set; }
         public Funcao? Funcao { get; set; }
+
+
+        [Display(Name = "Cadastrado por")]
+        public string? CriacaoResp { get; set; }
+
+
+        [Display(Name = "Cadastrado em")]
+        public DateTime? CriacaoData { get; set; }
+
+
+        [Display(Name = "Revisado por")]
+        public string? RevisaoResp { get; set; }
+
+
+        [Display(Name = "Revisado em")]
+        public DateTime? RevisaoData { get; set; }
     }
 }

@@ -16,16 +16,16 @@
                 @Html.DisplayNameFor(model => model.PessoaIdFuncionario)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Pessoa.NomeCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcao)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.DataAdmissao)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataDemissao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pessoa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Funcao)
             </th>
             <th></th>
         </tr>
@@ -34,19 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaIdFuncionario)
+                @Html.DisplayFor(modelItem => item.Pessoa.CpfCnpj)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.Pessoa.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcao.Cargo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataAdmissao)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataDemissao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pessoa.CpfCnpj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Funcao.Cargo)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PessoaIdFuncionario">Edit</a> |

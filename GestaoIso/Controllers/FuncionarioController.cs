@@ -1,11 +1,13 @@
 ﻿#nullable disable
 using GestaoIso.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoIso.Controllers
 {
+    [Authorize]
     public class FuncionarioController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,7 +51,7 @@ namespace GestaoIso.Controllers
             ViewData["FuncaoId"] = new SelectList(_context.Funcao, "FuncaoId", "Cargo", funcionario?.FuncaoId);
 
             ViewData["PessoaIdFuncionario"] = new SelectList(
-                _context.Pessoa.Select(c => new { c.PessoaId, Nome = c.CpfCnpj + " - " + c.Nome })
+                _context.Pessoa.Select(c => new { c.PessoaId, Nome = c.CpfCnpj + " - " + c.NomeCompleto})
                 , "PessoaId", "Nome", funcionario?.PessoaIdFuncionario);
         }
 
@@ -73,6 +75,8 @@ namespace GestaoIso.Controllers
                 if (ModelState.IsValid)
                 {
                     _context.Add(funcionario);
+                    funcionario.CriacaoResp = User.Identity.Name;
+                    funcionario.CriacaoData = DateTime.Now;
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -126,6 +130,8 @@ namespace GestaoIso.Controllers
 
             if (ModelState.IsValid)
             {
+                funcionario.RevisaoData = DateTime.Now;
+                funcionario.RevisaoResp = User.Identity.Name;
                 try
                 {
                     _context.Update(funcionario);

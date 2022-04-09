@@ -4,6 +4,7 @@ using GestaoIso.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoIso.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220408153656_FuncionarioController_Revisao_CriarViewBag")]
+    partial class FuncionarioController_Revisao_CriarViewBag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,12 +146,6 @@ namespace GestaoIso.Migrations
                     b.Property<int>("PessoaIdFuncionario")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CriacaoData")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CriacaoResp")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DataAdmissao")
                         .HasColumnType("datetime2");
 
@@ -158,12 +154,6 @@ namespace GestaoIso.Migrations
 
                     b.Property<int>("FuncaoId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("RevisaoData")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RevisaoResp")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PessoaIdFuncionario");
 
