@@ -36,5 +36,7 @@ namespace GestaoIso.Data
         public DbSet<GestaoIso.Data.Pessoa> Pessoa { get; set; }
 
         public DbSet<GestaoIso.Data.Funcionario> Funcionario { get; set; }
+
+        public DbSet<GestaoIso.Data.Usuario> Usuario { get; set; }
     }
 }

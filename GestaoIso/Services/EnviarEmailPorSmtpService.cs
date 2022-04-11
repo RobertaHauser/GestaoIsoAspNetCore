@@ -19,14 +19,22 @@ namespace GestaoIso.Services
             return null;
         }
 
+
+
+        static Email Email()
+        {
+            return new Email("contato@ycaro.net", "m)x)~)Z!2$KE", "mail.ycaro.net", 587)
+            {
+                EnableSsl = false
+            };
+        }
+
+
         private void Processar(EmailDTO emailDTO)
         {
             try
             {
-                var email = new Email("rbgh.desenvolvimento@outlook.com", "Senh@1234", "smtp.gmail.com", 587)
-                {
-                    EnableSsl = true
-                };
+                var email = Email();
                 email.Titulo(emailDTO.Titulo);
                 email.Conteudo(emailDTO.Mensagem, true);
 
